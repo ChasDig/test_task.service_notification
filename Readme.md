@@ -129,6 +129,5 @@ docker compose -f ./docker-compose.yaml -f docker-compose.override.yaml up -d
 
 
 ## Code Style:
-## TODO:
 - **PEP8**(https://peps.python.org/pep-0008/);
 - Docstring-формат - **reStructuredText (reST)**;
