@@ -60,7 +60,7 @@
 
 2. При необходимости, поднимите связанные сервисы в **docker-compose-local.yaml** (PostgreSQL, Redis):
 ```sh
-docker compose -f ./docker-compose-local.yaml up -d
+docker compose -f ./docker-compose-local.yaml -f docker-compose.override.yaml up -d
 ```
 
 3. Установите зависимости:
@@ -68,10 +68,16 @@ docker compose -f ./docker-compose-local.yaml up -d
 pip install -r requirements.txt
 ```
 
-4. Запустите проект (требуется указать директорию **service_notification** как root):
+4. Запустите REST-API часть проект (требуется указать директорию **service_notification** как root):
 ```sh
 cd ./service_notification
 uvicorn service_notification.asgi:application --host 127.0.0.1 --port 8000 --reload
+```
+
+5. Запустите Celery(Worker) часть проект (требуется указать директорию **service_notification** как root):
+```sh
+cd ./service_notification
+celery -A service_notification worker -l info
 ```
 
 

@@ -19,7 +19,7 @@ class EmailNotifier(AbstractNotifier):
                 )
 
             except Exception as ex:
-                raise EmailNotificationError() from ex
+                raise EmailNotificationError(ex) from ex
 
         else:
             raise EmailNotificationError("user have not email")

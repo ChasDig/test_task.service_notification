@@ -22,7 +22,7 @@ class TelegramNotifier(AbstractNotifier):
                 )
 
             except Exception as ex:
-                raise TelegramNotificationError() from ex
+                raise TelegramNotificationError(ex) from ex
 
         else:
             raise TelegramNotificationError("user have not telegram_id")

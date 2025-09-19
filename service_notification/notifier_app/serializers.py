@@ -61,6 +61,7 @@ class NotificationSerializer(serializers.Serializer):
         validators=[
             check_users_exist,
         ],
+        child=serializers.IntegerField(),
         help_text="ID пользователей",
         min_length=1,
         max_length=50,

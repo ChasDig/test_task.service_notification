@@ -23,7 +23,7 @@ class SMSNotifier(AbstractNotifier):
                 )
 
             except Exception as ex:
-                raise SMSNotificationError() from ex
+                raise SMSNotificationError(ex) from ex
 
         else:
             raise SMSNotificationError("user have not phone number")
