@@ -1,0 +1,29 @@
+@startuml
+
+!define WEB_INTERFACE #FFA07A
+!define NOTIFICATION #FFD700
+!define SERVICE #98FB98
+!define STORAGE #87CEEB
+!define WORKER #FFB6C1
+!define BROKER #ADD8E6
+
+rectangle "Client" as client {
+  component "Web-Interface" as web_interface WEB_INTERFACE
+}
+
+rectangle "Backend" as backend {
+  component "Service_Notification" as service_notification SERVICE
+  component "Celery Worker" as celery_worker WORKER
+
+  database "PostgreSQL DB" as pg_db STORAGE
+  rectangle "Redis (Broker)" as redis_broker BROKER
+}
+
+web_interface -> service_notification : API Request
+service_notification -> pg_db : CRUD Data
+service_notification -> redis_broker : Send Task
+celery_worker -> redis_broker : Fetch Task
+celery_worker -> pg_db : CRUD Data
+service_notification -> web_interface : Response
+
+@enduml
